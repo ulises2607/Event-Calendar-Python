@@ -36,39 +36,39 @@
 
 ### Tech Stack <a name="tech-stack"></a>
 
-<details>
-  <summary>Client</summary>
+
   <ul>
     <li>Python</li>
     <li>Tkinter</li>
     <li>MySQL</li>
   </ul>
-</details>
+
 
 <!-- Features -->
 
 ### Key Features <a name="key-features"></a>
 
-- **Great Design and Colors.**
-- **Good Practices within each File.**
-- **Excellent use of Local Storage.**
-- **Code divided into modules**
+- **Interfaz de calendario para gestionar eventos en fechas específicas**
+- **Agregar, editar y eliminar eventos con título, hora, duración, descripción, importancia y etiquetas.**
+- **Filtrar eventos por etiquetas para ver categorías específicas.**
+- **Los datos se almacenan en una base de datos MySQL para persistencia.**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Future Features <a name="future-features"></a>
 
-- **Implement a CSS Preprocessor.**
-- **Implement a Database**
+- **Implemente la autenticación de usuarios y la gestión de eventos de usuarios individuales.**
+- **Agregar recordatorios de eventos y notificaciones.**
+- **Mejorar la UI/UX con un estilo y una capacidad de respuesta mejorados.**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🚀 Live Demo <a name="live-demo"></a>
-
+- Proximamente
 
 ### Take a Look
 
-- [Live Demo Link](https://ulises2607.github.io/Awesome-Books-v2/)
+- Proximamente
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -81,8 +81,8 @@ To get a local copy up and running, follow these steps.
 Clone this repository to your desired folder:
 
 ```
-git@github.com:ulises2607/Awesome-Books-v2.git
-cd Awesome-Project-v2
+git clone git@github.com:ulises2607/Event-Calendar-Python.git
+cd Event-Calendar-Python
 code . (To open VS Code Editor)
 ```
 
@@ -90,28 +90,15 @@ Then, you will change everything you want!
 
 ### Test
 
-In order to follow the Linters you could check them using this:
+- None
 
-```
-HTML Checker:
-npx hint .
+### Uso
 
-CSS Checker:
-npx stylelint "**/*.{css,scss}"
+Para ejecutar el proyecto por primera vez se ejecuta desde el main.py, cargandose unos datos de prueba para visualizar los eventos cargados en el calendario. Luego de la primera ejecucion, comentar la funcion en el archivo datos.py llamada insertarDatos() en la linea 200.
 
-JavaScript Checker:
-npx eslint .
-```
 
-### Usage
 
-To run the project, execute the following command: -Double click the index.html file.
-
-#### Note
-
-Use at the end '--fix' to help you out with any error.
-
-## 👥 Author <a name="authors"></a>
+## 👥 Autor <a name="authors"></a>
 
 
 👤 **Ulises**
@@ -120,25 +107,23 @@ Use at the end '--fix' to help you out with any error.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 🤝 Contributing <a name="contributing"></a>
+## 🤝 Contribuciones <a name="contributing"></a>
 
-Contributions, issues, and feature requests are welcome!
+¡Las contribuciones, problemas y solicitudes de características son bienvenidas! 
 
-Feel free to check the [issues page](https://github.com/ulises2607/Awesome-Books-v2/issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## ⭐️ Show your support <a name="support"></a>
-
-If you like this project feel free to watch it and take some features that will enhance your project
-as well.
+Feel free to check the [issues page](https://github.com/ulises2607/Event-Calendar-Python/issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 🙏 Acknowledgments <a name="acknowledgements"></a>
+## ⭐️ Apoya el Proyecto <a name="support"></a>
 
-I would like to thank the Microverse Team for reviewing my code and making me a better
-professional.
+Si te gusta este proyecto, ¡no dudes en marcarlo con una estrella y utilizar algunas de sus características para mejorar tus propios proyectos!
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## 🙏 Agradecimientos <a name="acknowledgements"></a>
+
+Me gustaria dar las gracias a la institucion UPATECO por darme la oportunidad de acceder a una educacion inclusiva y de calidad de manera remota.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
