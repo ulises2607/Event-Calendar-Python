@@ -9,7 +9,7 @@ def main():
     root = tk.Tk()
     # root.iconbitmap(default=config.icono)
     root.title("Event Calendar")
-    root.columnconfigure(0, weight=1)
+    root.columnconfigure(0, weight=2)
     root.rowconfigure(0,weight=1)
     ui.Principal(root).grid(sticky=tk.NSEW)
     root.mainloop()

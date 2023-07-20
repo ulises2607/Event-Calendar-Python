@@ -14,7 +14,7 @@ class Manipulacion():
 
         return meses_dict[month]
 
-    #print(mes_int_a_string(3))
+    #print(mes_int_a_string(8))
     #print(type(mes_int_a_string(3)))
 
     @staticmethod
@@ -24,12 +24,16 @@ class Manipulacion():
 
             """
             lista_dias = []
-            mes_calendario = monthcalendar(año,mes)
+            mes_calendario = monthcalendar(año, mes)
 
-            for i in mes_calendario:
-                for j in i:
-                    lista_dias.append(j)
+            for semana in mes_calendario:
+                for dia in semana:
+                    if dia == 0:
+                        lista_dias.append(0)
+                    else:
+                        lista_dias.append(dia)
             
             return lista_dias
+    
     
    
