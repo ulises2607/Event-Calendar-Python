@@ -5,6 +5,8 @@ from tkinter import ttk
 from tkinter import *
 import tkinter as tk
 from calendar import monthcalendar
+from tkinter import messagebox
+from tkinter.messagebox import askyesno
 import datos
 
 
@@ -169,10 +171,11 @@ class Eventos(ttk.Frame):
         #FRAME VISUALIZACION DE EVENTOS
         self.frame = Frame(self,width=400, height=250)
         self.frame.grid()
-    # def tablaEvent(self):
-        self.eventos_registrados = ttk.Treeview(self.frame, columns=("titulo", "fecha_hora", "duracion", "descripcion", "importancia", "etiquetas"))
+   
+        self.eventos_registrados = ttk.Treeview(self.frame, columns=("id_evento","titulo", "fecha_hora", "duracion", "descripcion", "importancia", "etiquetas"))
+        self.eventos_registrados.heading("id_evento", text="id_evento")
         self.eventos_registrados.heading("titulo", text="Titulo")
-        self.eventos_registrados.heading("fecha_hora", text="Fecha-Hora")
+        self.eventos_registrados.heading("fecha_hora", text="Hora")
         self.eventos_registrados.heading("duracion", text="Duracion")
         self.eventos_registrados.heading("descripcion", text="Descripcion")
         self.eventos_registrados.heading("importancia", text="Importancia")
@@ -190,12 +193,23 @@ class Eventos(ttk.Frame):
         self.btn_agregar.grid(row=1,column=1)
         
         self.btn_eliminar = Button(self.frame2, text="Eliminar",
-                                   width=15, height=5)
+                                   width=15, height=5, command=self.eliminar)
         self.btn_eliminar.grid(row=1,column=2, padx=15)
         
         self.btn_editar = Button(self.frame2, text= "Modificar",
                                  width=15, height=5)
         self.btn_editar.grid(row=1,column=3)
+
+        self.etiqueta_filtro = Label(self.frame2, text="Filtrar por etiqueta: ")
+        self.etiqueta_filtro.grid(row=1,column=4)
+
+        self.etiqueta_op = ttk.Combobox(self.frame2,values=["Universidad","Trabajo","Pasatiempo", "Otros"])
+        self.etiqueta_op.grid(row=1,column=5)
+
+        self.btn_editar = Button(self.frame2, text= "Filtrar",
+                                 width=15, height=3, command=self.filtrarEtiquetas)
+        self.btn_editar.grid(row=1,column=6)
+
 
         self.mostrarDatos(año, mes, dia)
         
@@ -209,7 +223,7 @@ class Eventos(ttk.Frame):
 
         # Insertando los datos en el Treeview
         for fila in data:
-            self.eventos_registrados.insert('', 'end', values=(fila[0], fila[1], fila[2], fila[3], fila[4], fila[5]))
+            self.eventos_registrados.insert('', 'end', values=(fila[0],fila[1], fila[2], fila[3], fila[4], fila[5], fila[6] ))
         
     def agregarFrame(self):
         self.frame3 = Frame(self, width=400, height=250, pady=15)
@@ -230,7 +244,6 @@ class Eventos(ttk.Frame):
         self.descripcion = Text(self.frame3, width=40, height = 10)
         self.descripcion.grid(row=3,column=0)
 
-        
 
         #horarios
             #Selector de hora
@@ -266,7 +279,7 @@ class Eventos(ttk.Frame):
         self.etiqueta_label = Label(self.frame3, text="Etiqueta",pady=1)
         self.etiqueta_label.grid(row=1,column=2, pady=(0, 0))
 
-        self.etiqueta = ttk.Combobox(self.frame3,values=["Universidad","Trabajo","Pasatiempo"])
+        self.etiqueta = ttk.Combobox(self.frame3,values=["Universidad","Trabajo","Pasatiempo","Otros"])
         self.etiqueta.grid(row=2,column=2, pady=(0, 0))
 
             # Botones
@@ -298,60 +311,28 @@ class Eventos(ttk.Frame):
         self.mostrarDatos(self.año,self.mes,self.dia)
         self.frame3.destroy()
         
+    def eliminar(self):
+        seleccion = self.eventos_registrados.selection()
+        if seleccion:
+            item = self.eventos_registrados.item(seleccion[0])
+            id_evento = item['values'][0] # id de la tarea obtenida del treeview
+            tarea = item['values'][1]
+            mensaje = f"Esta a punto de eliminar la tarea: {tarea}.\n¿Desea continuar?"
+            if askyesno(title="Eliminar tarea", message=mensaje):
+                datos.eliminarEvento(id_evento)
+                messagebox.showinfo(message="Tarea eliminada.")
+                self.mostrarDatos(self.año,self.mes,self.dia)
+        else:
+            messagebox.showinfo(message="Debe seleccionar una tarea primero")
 
 
+    def filtrarEtiquetas(self):
+        etiqueta = self.etiqueta_op.get()
 
-        # id_etiqueta_label = tk.Label(self.frame3, text="ID Etiqueta:")
-        # id_etiqueta_label.pack()
-        # id_etiqueta_entry = tk.Entry(self.frame3)
-        # id_etiqueta_entry.pack()
+        fecha = datetime.date(self.año, self.mes, self.dia)
+        fecha_str = fecha.strftime("%Y-%m-%d")  
+        data = datos.filtrarDatos(fecha_str, etiqueta)
+        self.eventos_registrados.delete(*self.eventos_registrados.get_children())
 
-        # titulo_evento_label = tk.Label(self.frame3, text="Título del Evento:")
-        # titulo_evento_label.pack()
-        # titulo_evento_entry = tk.Entry(self.frame3)
-        # titulo_evento_entry.pack()
-
-        # hora_evento_label = tk.Label(self.frame3, text="Hora del Evento:")
-        # hora_evento_label.pack()
-        # hora_evento_entry = tk.Entry(self.frame3)
-        # hora_evento_entry.pack()
-
-        # duracion_minutos_label = tk.Label(self.frame3, text="Duración en Minutos:")
-        # duracion_minutos_label.pack()
-        # duracion_minutos_entry = tk.Entry(self.frame3)
-        # duracion_minutos_entry.pack()
-
-        # descripcion_label = tk.Label(self.frame3, text="Descripción:")
-        # descripcion_label.pack()
-        # descripcion_entry = tk.Entry(self.frame3)
-        # descripcion_entry.pack()
-
-        # importancia_label = tk.Label(self.frame3, text="Importancia:")
-        # importancia_label.pack()
-        # importancia_entry = tk.Entry(self.frame3)
-        # importancia_entry.pack()
-
-        # # Crear botón para agregar los datos
-        # btn_insertar = tk.Button(self.frame3, text="Insertar Datos")
-        # btn_insertar.pack()
-
-        
-    
-    # def abrir_ventana_datosEventos(self):
-    #     top_level2 = tk.Toplevel()
-    #     datos_eventos = Datos(top_level2,self.dia,self.mes,self.año).grid()
-
-
-    
-
-    # def leer_datos_eventos(self):
-    #         #Falta estudiar y condicionar la lectura de los datos en sus correspondientes dias
-    #         f = open('WriteData.json','r')
-    #         data = json.loads(f.read())
-
-    #         count = 0
-
-    #         for record in data[f"{self.dia}"]:
-    #             self.eventos_registrados.insert(parent='', index="end", id=count, text="",
-    #                                             values=(record['Titulo'],record['Descripcion'],record['Hora de Aviso'], record['Duracion de evento'], record['Modo de recordatorio']))
-    #            count += 1
+        for fila in data:
+            self.eventos_registrados.insert('', 'end', values=(fila[0], fila[1], fila[2], fila[3], fila[4], fila[5], fila[6]))
